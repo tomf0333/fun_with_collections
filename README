@@ -1,0 +1,44 @@
+tomf0333
+
+
+Files:
+	CollectionFacadeSet - Wraps an underlying Collection and serves to both simplify its API and give it a
+		common type with the implemented SimpleHashSets.
+	SimpleHashSet - A superclass for implementations of hash-sets implementing the SimpleSet interface.
+	OpenHashSet - a class that represents an open hashing handling hash set, it has an array of buckets
+		(Linked List via wrapper) and each value is added to the bucket that corresponds to its hash and
+		bitwise modulo.
+	SpecificFacadeSet - a specific wrapper made from CollectionFacadeSet to use for OpenHashSet.
+	ClosedHashSet - a class that represents a Closed hashing handling hash set, it has an array of
+		SuperStrings (like normal strings except they have a member that says if they were deleted
+		for the purpose of this class), when we want to add Strings in this class we hash them with
+		quadratic equation and then insert them. there is a probe for inserting and a probe for searching
+		that know to search with the algorithm specified.
+	SuperString - a class for objects that have String values and a member telling if they were deleted
+		or not.
+	SimpleSetPerformanceAnalyzer - this class analyses the performance of the other data structures
+		we made in this ex, plus some of the known collections from java. it uses the Scanner class
+		to have an interface (not like that) with the user that wants to test.
+	
+Design:
+	
+	
+Implementation issues:
+	1 - OpenHashSet was implemented with a specificFacadeSet which inherits from CollectionFacadeSet and is
+		essencially an array of linked lists where each cell is a bucket to which we insert the Strings.
+	2 - the deletion method in ClosedHashSet uses the search probe that contains uses to find the String
+		we want to delete then it turns it to deleted which in SuperString means that its value is null
+		like a normal empty string but its member that says it was deleted is turned on which means if the
+		probe search goes over it it will continue to search.
+		if it wasn't found in the Set then it will do nothing and return false.
+	
+	
+Answers to questions:
+	1 - the analesys for OpenHashSet and ClosedHashSet in inserting data1.txt was very long when compared
+		to java's collections because i assume they are better then me in writing their code.
+		plus according to information from the 4th test all the Strings in data1.txt have the same hash
+		code so obbviously it would take a long time the way we were told to implement these classes.
+	2 - it seems that java's hash set was the winner of pretty much all the tests so mostly i would use it
+		instead of the others.
+	3 - mostly OpenHashSet faired better then ClosedHashSet which makes sense if there was a reletively
+		good spread of Strings.
